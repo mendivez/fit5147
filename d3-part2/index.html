@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Austage: Victorian events</title>
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+      integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body * {
+        font-family: sans-serif;
+    }
+
+    body {
+        background-color: #f3efe7;
+    }
+
+    .page {
+        width: 850px;
+        background-color: white;
+        margin: auto;
+        padding: 50px;
+        padding-top: 35px;
+    }
+
+    h1 {
+        font-weight: 900;
+    }
+
+    .pure-g {
+        margin-bottom: 40px;
+    }
+
+    .small-font {
+        font-size: 11px;
+    }
+
+    .suburb {
+      stroke: #999;
+      stroke-width: 0.3px;
+    }
+    /* Centre the legend and map SVGs in the page */
+    svg {
+      display: block;
+      margin: 0 auto;
+      /* Stop double-click (map reset) from selecting SVG text */
+      -webkit-user-select: none; /* Safari */
+      user-select: none;
+    }
+    #chart text,
+    #legend text {
+      font: 12px sans-serif;
+    }
+    /* Chart and legend titles */
+    #chart .title,
+    #legend .title {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    /* Chart and legend subtitles */
+    #chart .subtitle,
+    #legend .subtitle {
+      font-weight: normal;
+      font-size: 12px;
+    }
+    /* Tooltip container styling (from the PE3 template) */
+    #tooltip {
+      position: absolute;
+      background-color: white;
+      border: 1px solid #999;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: sans-serif;
+      pointer-events: none;
+      display: none;
+      white-space: pre-wrap;
+      max-width: 240px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+    <div class="page">
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <h1>Austage Events</h1>
+                <p>Brief introduction to data source and story.</p>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <h2>Evolution of Victorian events</h2>
+                <p>Description of line chart and map.</p>
+                <svg id="chart"></svg>
+                <svg id="legend"></svg>
+                <svg id="map"></svg>
+                <div id="tooltip"></div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1-1 small-font">
+                <p>Data sources here for Austage.</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+  <!-- Load D3 script -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script type="module" src="d3-vis.js"></script>
+</body>
+</html>
