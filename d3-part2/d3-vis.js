@@ -2,6 +2,10 @@
 const suburbsFile = "SAL_2021_AUST_GDA2020.json";
 const eventsFile = "AusStage_events_1900_onwards.csv";
 
+// Last year shown: 2025 is incomplete (only 8 events), so events still active
+// after this year are left out
+const lastYear = 2024;
+
 // The map's width (shared by the chart and legend) is the width of the page
 // column holding the SVGs, so they line up with the text. Its height follows
 // from the map's shape at that width.
@@ -16,6 +20,14 @@ const zeroColor = "#eee";
 const waterColor = "#c9e4ee"; // a paler lightblue (#add8e6)
 const waterLabelColor = "#4a90b8";
 const bayLabelPosition = [144.818, -38.063]; // [lon, lat]
+
+// Source and disclaimer in the map's bottom-left corner ([2] is the footnote in
+// the page footer). Fixed to the SVG, so it doesn't move when the map zooms.
+const mapNote = [
+  "Suburb boundaries: ABS SAL 2021 [2].",
+  "Events since 1900 are placed in today's suburbs."
+];
+const mapNoteColor = "#444";
 
 // Zoom factor when clicking a suburb (1 = whole map), and animation length
 const clickZoom = 3;
@@ -144,6 +156,24 @@ function drawMap(features, projection, path, width, height) {
   return suburbs;
 }
 
+// Map note: one line of text per mapNote entry, bottom-left, outside mapGroup
+function drawMapNote(height) {
+  const lineHeight = 14;
+  svg.append("text")
+    .attr("class", "map-note")
+    .attr("x", 8)
+    .attr("y", height - 8 - (mapNote.length - 1) * lineHeight)
+    .attr("fill", mapNoteColor)
+    .style("font", "11px 'Open Sans', sans-serif")
+    .style("pointer-events", "none")
+    .selectAll("tspan")
+    .data(mapNote)
+    .join("tspan")
+    .attr("x", 8)
+    .attr("dy", (d, i) => i === 0 ? 0 : lineHeight)
+    .text(d => d);
+}
+
 function tooltipText(d) {
   const name = d.properties.SAL_NAME21.replace(/ \(.*\)$/, "");
   const count = d.properties.count === 0
@@ -213,7 +243,7 @@ function drawChart(events, chartWidth, onRangeChange) {
     .attr("height", chartHeight);
 
   addHeading(chart, `Active events per year, ${minYear}–${maxYear}`,
-    "Drag they grey rectangle to change the map's time range (10 years).");
+    "Drag the grey rectangle to change the map's time range (10 years).");
 
   chart.append("g")
     .attr("transform", `translate(0, ${chartHeight - margin.bottom})`)
@@ -296,9 +326,10 @@ function drawPeakAnnotation(chart, data, x, y) {
 
 // Selection window: windowYears wide, the height of the plot area, and
 // draggable left/right between the first and last year. It snaps to whole
-// years and selects years startYear to startYear + windowYears - 1.
+// years and selects years startYear to startYear + windowYears - 1; its left
+// and right edges sit on those first and last selected years.
 function drawSelectionWindow(chart, x, minYear, maxYear, onRangeChange) {
-  const windowWidth = x(minYear + windowYears) - x(minYear);
+  const windowWidth = x(minYear + windowYears - 1) - x(minYear);
   const minX = x(minYear);
   const maxX = x(maxYear) - windowWidth;
   let windowX = x(initialStartYear);
@@ -425,6 +456,7 @@ function main([geo, rows]) {
   svg.attr("width", width)
     .attr("height", height);
 
+  rows = rows.filter(d => +d["Last Year"] <= lastYear);
   const events = prepareEvents(rows, features);
 
   // From share of events to color: scaleThreshold puts x < threshold in the lower class (e.g. under 0.1%, first class)
@@ -433,9 +465,10 @@ function main([geo, rows]) {
     .range(d3.schemeOranges[limits.length + 1]);
 
   const suburbs = drawMap(features, projection, path, width, height);
+  drawMapNote(height);
   setupZoom(suburbs, path, width, height);
 
-  // Fixed legend, one scale, drawn once; bar proportions use all events (1900–2025).
+  // Fixed legend, one scale, drawn once; bar proportions use all events (1900–2024).
   countEvents(events, features, -Infinity, Infinity);
   colourSuburbs(suburbs, color);
   drawLegend(color, features, width);
