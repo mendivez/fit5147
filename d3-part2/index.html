@@ -2,97 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Austage: Victorian events</title>
+  <title>AusStage: Melbourne events</title>
   <!-- Import pure.css -->
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
       integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body * {
-        font-family: sans-serif;
-    }
-
-    body {
-        background-color: #f3efe7;
-    }
-
-    .page {
-        width: 850px;
-        background-color: white;
-        margin: auto;
-        padding: 50px;
-        padding-top: 35px;
-    }
-
-    h1 {
-        font-weight: 900;
-    }
-
-    .pure-g {
-        margin-bottom: 40px;
-    }
-
-    .small-font {
-        font-size: 11px;
-    }
-
-    .suburb {
-      stroke: #999;
-      stroke-width: 0.3px;
-    }
-    /* Centre the legend and map SVGs in the page */
-    svg {
-      display: block;
-      margin: 0 auto;
-      /* Stop double-click (map reset) from selecting SVG text */
-      -webkit-user-select: none; /* Safari */
-      user-select: none;
-    }
-    #chart text,
-    #legend text {
-      font: 12px sans-serif;
-    }
-    /* Chart and legend titles */
-    #chart .title,
-    #legend .title {
-      font-weight: bold;
-      font-size: 14px;
-    }
-    /* Chart and legend subtitles */
-    #chart .subtitle,
-    #legend .subtitle {
-      font-weight: normal;
-      font-size: 12px;
-    }
-    /* Tooltip container styling (from the PE3 template) */
-    #tooltip {
-      position: absolute;
-      background-color: white;
-      border: 1px solid #999;
-      padding: 6px 10px;
-      font-size: 12px;
-      font-family: sans-serif;
-      pointer-events: none;
-      display: none;
-      white-space: pre-wrap;
-      max-width: 240px;
-      text-align: left;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="page">
         <div class="pure-g">
             <div class="pure-u-1-1">
-                <h1>Austage Events</h1>
-                <p>Brief introduction to data source and story.</p>
+                <h1>History of live performances in Melbourne</h1>
+                <p> <a href="https://ausstage.edu.au/pages/learn/about">AusStage</a> is a database of national
+                    live performances, a project led by multiple universities, government
+                    agencies, industry partners and funded by the Australian Research Council (ARC)
+                    among others. It is a multi-source aggregation and maintenance effort.
+                    As a result, coverage can be biased since certain venues that are more
+                    active in their contributions can be over-represented.
+                    This time we focus on live performances in metropolitan Melbourne and their evolution, but keep
+                    in mind that any trend described in this narrative could be
+                    because of an organic growth of events over time,
+                    but also due to improvements in recent record-keeping.
+                </p>
             </div>
         </div>
 
         <div class="pure-g">
             <div class="pure-u-1-1">
-                <h2>Evolution of Victorian events</h2>
-                <p>Description of line chart and map.</p>
+                <h2>Evolution of Melbourne events</h2>
+                <p>
+                    In the visualisation below, we observe that the scope of the data are
+                    events that run from 1900 to 2025. We limit the data for technical purposes
+                    but AusStage actually contains records that date back to the 1800s. The data
+                    also considers venues that host these events and we can see that being
+                    represented in the map below, as an aggregation per suburb.
+                    Both the chart and the map only include events held in the suburbs shown on
+                    the map (about 87% of AusStage's Victorian events since 1900).
+                </p>
+                <p>
+                    The chart below shows <b>active</b> events, with an event being an ongoing
+                    production that spans a certain period of time (months, years) rather than
+                    a one-night presentation. We can see the peak of active events occurring between
+                    2005 and 2015 with a sharp decline at the start of the 2010s, recovering a bit
+                    before plummeting down to almost zero in 2020 due to the COVID-19 global pandemic.
+                </p>
+
+                <p>
+                    The map shows active events per Melbourne suburb as a percentage of the total from the
+                    time selection window in the line chart.
+                    It is probably no surprise that suburbs in the vicinity of Melbourne's CBD
+                    always dominated in terms of venue choices for live performances (ever since
+                    the 1900s).
+                    Until perhaps the 1980s, most events were conducted in the CBD and the eastern
+                    suburbs, consistently expanding to the north east.
+                    Slowly though, performances started to become more popular in the outer
+                    suburbs, expanding to the west and creating a bit of a performance hub in the suburb of
+                    Werribee (from the early 2000s until today).
+                </p>
                 <svg id="chart"></svg>
                 <svg id="legend"></svg>
                 <svg id="map"></svg>
@@ -101,8 +68,29 @@
         </div>
 
         <div class="pure-g">
+            <div class="pure-u-1-1">
+                <h2>Conclusion</h2>
+                <p>
+                    The AusStage database is, to an extent, a community-maintained, decentralised repository
+                    of live performances in Australia.
+                    It is worth noting that venues, organisations, private companies, volunteers
+                    all make contributions in different volumes, creating a rich, but perhaps uneven,
+                    snapshot of live performances across Australia.
+                    It is important to acknowledge the historical significance of these types of events and
+                    the maintainers that make this registration possible.
+                </p>
+                <p>
+                    Ignoring the distribution of active events over the years, we can agree that,
+                    from a spatial distribution perspective, performances see the benefit of decentralisation,
+                   with more outer suburb venues hosting more events in recent years,
+                   even if the overall active count seems to have dropped in the 2020s.
+                </p>
+            </div>
+        </div>
+        <div class="pure-g">
             <div class="pure-u-1-1 small-font">
-                <p>Data sources here for Austage.</p>
+                <p>This website acknowledges AusStage, <a href="https://www.ausstage.edu.au">https://www.ausstage.edu.au</a> © AusStage and contributors, CC BY-NC-SA 4.0.
+                </p>
             </div>
         </div>
     </div>

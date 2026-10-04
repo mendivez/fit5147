@@ -1,0 +1,84 @@
+/* Open Sans from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;0,800;1,400&display=swap");
+
+body * {
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    background-color: #f3efe7;
+}
+
+.page {
+    width: 700px;
+    background-color: white;
+    margin: auto;
+    padding: 50px;
+    padding-top: 35px;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+p {
+    text-align: justify;
+}
+
+.pure-g {
+    margin-bottom: 40px;
+}
+
+.small-font {
+    font-size: 11px;
+}
+
+.suburb {
+  stroke: #999;
+  stroke-width: 0.3px;
+}
+/* SVGs fill the page column (their width is set in d3-vis.js) */
+svg {
+  display: block;
+  margin: 0 auto;
+  /* Stop double-click (map reset) from selecting SVG text */
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+}
+#chart text,
+#legend text {
+  font: 12px "Open Sans", sans-serif;
+}
+/* Chart and legend titles */
+#chart .title,
+#legend .title {
+  font-weight: bold;
+  font-size: 14px;
+}
+/* Chart and legend subtitles */
+#chart .subtitle,
+#legend .subtitle {
+  font-weight: normal;
+  font-size: 12px;
+}
+/* Tooltip and chart annotation box styling (from the PE3 template) */
+#tooltip,
+.annotation {
+  background-color: white;
+  border: 1px solid #999;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  white-space: pre-wrap;
+  max-width: 240px;
+  text-align: left;
+}
+#tooltip {
+  position: absolute;
+  pointer-events: none;
+  display: none;
+}
+/* Shrink the annotation box to fit its text */
+.annotation {
+  display: inline-block;
+}
